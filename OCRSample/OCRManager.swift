@@ -8,6 +8,7 @@
 import Foundation
 import VisionKit
 import Vision
+import CoreML
 
 class OCRManager {
     
@@ -62,6 +63,30 @@ class OCRManager {
             try requestHandler.perform([request])
         } catch {
             print("OCR Error: \(error)")
+        }
+    }
+    func extractText2(from image: UIImage, completion: @escaping (String?) -> Void) {
+        guard let coreMLModel = try? HiraganaKatakanaClassifier(configuration: MLModelConfiguration()), let visionModel = try? VNCoreMLModel(for: coreMLModel.model) else {
+            return completion(nil)
+        }
+        let request = VNCoreMLRequest(model: visionModel) { request, error in
+            print(error)
+            print(request)
+            guard error == nil else { return completion(nil) }
+            guard let classification = request.results as? [VNClassificationObservation] else { return completion(nil) }
+
+            // 👉 타이틀을 가장 정확도 높은 이름으로 설정
+            if let fitstItem = classification.first {
+                print(fitstItem)
+//                completion(fitstItem.)
+            }
+        }
+
+        let handler = VNImageRequestHandler(ciImage: CIImage(image: image)!)
+        do {
+            try handler.perform([request])
+        } catch {
+            print(error)
         }
     }
 }
