@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lbMain: UILabel!
     @IBOutlet weak var drawingView: DrawingView!
     
+    @IBOutlet weak var ivTset: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,5 +30,8 @@ extension ViewController: DrawingViewDelegate {
     func didExtractText(text: String?) {
         let text: String = text ?? "인식 결과가 없습니다."
         lbMain.text = text
+    }
+    func setImage(image: UIImage) {
+        ivTset.image = image
     }
 }

@@ -22,13 +22,23 @@ class OCRManager {
         guard let cgImage: CGImage = image.cgImage else { return completion(nil) }
         let requestHandler = VNImageRequestHandler(cgImage: cgImage)
         let request = VNRecognizeTextRequest { request, error in
-            
             guard let observations = request.results as? [VNRecognizedTextObservation] else { return completion(nil) }
-            let recognizedStrings = observations.compactMap { observation in
+            var recognizedStrings = observations.compactMap { observation in
                 // Return the string of the top VNRecognizedText instance.
-                return observation.topCandidates(1).first?.string
+                print(observation)
+                print(observation.topCandidates(1).first?.confidence)
+                if observation.topCandidates(1).first?.string != "あいうえおかきくけこさしすせそたちってとなにぬねのはひふへほまみむめもやゆよらりるれろわをん" && observation.topCandidates(1).first?.string != "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフへホマミムメモヤユヨラリルレロワヲン" {
+                    return observation.topCandidates(1).first?.string
+                } else {
+                    return nil
+                }
+                
             }
+//            recognizedStrings.removeAll(where: {
+//                $0 == "あいうえおかきくけこさしすせそたちってとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"
+//            })
             completion(recognizedStrings.first)
+            print(recognizedStrings)
         }
         request.recognitionLevel = .accurate
         request.usesLanguageCorrection = false
@@ -77,6 +87,7 @@ class OCRManager {
 
             // 👉 타이틀을 가장 정확도 높은 이름으로 설정
             if let fitstItem = classification.first {
+                print(classification)
                 print(fitstItem)
 //                completion(fitstItem.)
             }

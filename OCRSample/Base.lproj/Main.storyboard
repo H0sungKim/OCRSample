@@ -51,25 +51,33 @@
                                     <action selector="onClickClear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4af-zA-h2z"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ADc-6e-xMP">
+                                <rect key="frame" x="16" y="584.33333333333337" width="361" height="217.66666666666663"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ADc-6e-xMP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="1dH-4r-nxj"/>
                             <constraint firstItem="zdb-1N-Eky" firstAttribute="leading" secondItem="yMi-qo-NBC" secondAttribute="trailing" constant="8" id="3EE-sf-Y6n"/>
                             <constraint firstItem="zdb-1N-Eky" firstAttribute="centerY" secondItem="M6s-pL-7HH" secondAttribute="centerY" id="6Yb-eP-Tbx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zdb-1N-Eky" secondAttribute="trailing" constant="8" id="BOT-0H-EEx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ADc-6e-xMP" secondAttribute="trailing" constant="16" id="LVr-Oh-VaU"/>
                             <constraint firstItem="ikA-bh-lyU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QaY-gP-RXV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TOp-GQ-VHM" secondAttribute="trailing" id="Tni-ha-mLF"/>
                             <constraint firstItem="TOp-GQ-VHM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="V0B-2c-GtV"/>
                             <constraint firstItem="M6s-pL-7HH" firstAttribute="centerY" secondItem="yMi-qo-NBC" secondAttribute="centerY" id="VPI-rl-06d"/>
+                            <constraint firstItem="ADc-6e-xMP" firstAttribute="top" secondItem="ikA-bh-lyU" secondAttribute="bottom" constant="16" id="aZb-TR-Bjl"/>
                             <constraint firstItem="M6s-pL-7HH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="e9m-p3-SDo"/>
                             <constraint firstItem="ikA-bh-lyU" firstAttribute="top" secondItem="TOp-GQ-VHM" secondAttribute="bottom" constant="32" id="q88-5k-OJV"/>
                             <constraint firstItem="M6s-pL-7HH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="rwn-x9-va0"/>
                             <constraint firstItem="TOp-GQ-VHM" firstAttribute="top" secondItem="yMi-qo-NBC" secondAttribute="bottom" constant="16" id="xUP-lU-nrH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ADc-6e-xMP" secondAttribute="bottom" constant="16" id="yDd-jy-THw"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="drawingView" destination="TOp-GQ-VHM" id="0R5-L9-vDF"/>
+                        <outlet property="ivTset" destination="ADc-6e-xMP" id="M9r-7i-RGu"/>
                         <outlet property="lbMain" destination="ikA-bh-lyU" id="xy6-Kv-DGY"/>
                     </connections>
                 </viewController>
