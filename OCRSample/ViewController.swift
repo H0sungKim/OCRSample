@@ -31,7 +31,7 @@ extension ViewController: DrawingViewDelegate {
         let text: String = text ?? "인식 결과가 없습니다."
         lbMain.text = text
     }
-    func setImage(image: UIImage) {
+    func setImage(image: UIImage?) {
         ivTset.image = image
     }
 }
