@@ -1,2 +1,4 @@
 # OCRSample
-OCR Swift iOS Sample
+Hiragana Katakana OCR Sample
+
+![preview](/docs/preview.gif)
