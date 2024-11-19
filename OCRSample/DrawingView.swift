@@ -28,13 +28,16 @@ class DrawingView: UIView {
         setNeedsDisplay()
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        requestExtractText()
+    }
+    
+    private func requestExtractText() {
         // UIGraphicsImageRenderer가 main에서 실행돼서 좀 끊김
         createDrawingImageAsync()
             .flatMap({ [weak self] image in
                 DispatchQueue.main.async {
                     self?.delegate?.setImage(image: image)
                 }
-                
                 return OCRManager.shared.extractText(from: image ?? UIImage())
             })
             .subscribe(on: DispatchQueue.global())
@@ -44,7 +47,6 @@ class DrawingView: UIView {
             })
             .store(in: &cancellable)
     }
-    
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -65,13 +67,15 @@ class DrawingView: UIView {
         }
     }
     
-    func undo(){
+    func undo() {
         _ = lines.popLast()
         setNeedsDisplay()
+        requestExtractText()
     }
-    func clear(){
+    func clear() {
         lines.removeAll()
         setNeedsDisplay()
+        self.delegate?.didExtractText(text: nil)
     }
     
     private func toProcessedImage() -> UIImage? {
@@ -82,8 +86,15 @@ class DrawingView: UIView {
         let renderer = UIGraphicsImageRenderer(size: size)
         
         return renderer.image { context in
-            self.drawHierarchy(in: CGRect(origin: CGPoint(x: 0, y: 0), size: self.bounds.size), afterScreenUpdates: true)
+            layer.render(in: context.cgContext)
             hiraganaKatakanaSample.draw(in: CGRect(x: 0, y: self.bounds.size.height, width: hiraganaKatakanaSample.size.width, height: hiraganaKatakanaSample.size.height))
+        }
+    }
+    
+    func toImage() -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { context in
+            layer.render(in: context.cgContext)
         }
     }
     
