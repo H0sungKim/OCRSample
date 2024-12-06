@@ -13,7 +13,7 @@ class DrawingView: UIView {
     public var strokeColor: UIColor = .label
     private var lines: [Line] = []
     private var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
-    private let hiraganaKatakanaSample: UIImage = UIImage(resource: .hksamplew)
+    private let hiraganaKatakanaSample: UIImage = UIImage(resource: .hksamplew).withRenderingMode(.alwaysOriginal).withTintColor(.label)
     
     weak var delegate: DrawingViewDelegate?
     
@@ -32,7 +32,6 @@ class DrawingView: UIView {
     }
     
     private func requestExtractText() {
-        // UIGraphicsImageRenderer가 main에서 실행돼서 좀 끊김
         createDrawingImageAsync()
             .flatMap({ [weak self] image in
                 DispatchQueue.main.async {
